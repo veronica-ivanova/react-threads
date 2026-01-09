@@ -5,8 +5,21 @@ import { App } from "./App"
 import { store } from "./app/store"
 import { NextUIProvider } from "@nextui-org/react";
 import "./index.css"
+import { createBrowserRouter } from "react-router-dom"
+import { ThemeProvider } from "./components/theme-provider"
 
 const container = document.getElementById("root")
+
+const router = createBrowserRouter([
+  {
+    path: '/auth',
+    element: <h1>Auth</h1>
+  },
+  {
+    path: '/',
+    element: <h1>Layout</h1>
+  }
+])
 
 if (container) {
   const root = createRoot(container)
@@ -15,7 +28,9 @@ if (container) {
     <StrictMode>
       <Provider store={store}>
         <NextUIProvider>
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </NextUIProvider>
       </Provider>
     </StrictMode>,

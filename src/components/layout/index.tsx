@@ -32,7 +32,7 @@ export const Layout = () => {
           <Outlet />
         </div>
         <div className="flex-2 p-4">
-          <div flex-col flex gap-5>
+          <div className="flex-col flex gap-5">
             {!user && <Profile />}
           </div>
         </div>

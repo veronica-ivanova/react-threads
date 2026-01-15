@@ -1,13 +1,13 @@
 import React from "react"
-import { selectCurent } from "../../features/user/userSlice"
+import { selectCurrent } from "../../features/user/userSlice"
 import { useSelector } from "react-redux"
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react"
-import { BASE_URL } from "../../constans"
+import { BASE_URL } from "../../constants"
 import { Link } from "react-router-dom"
 import { MdAlternateEmail } from "react-icons/md"
 
 export const Profile = () => {
-  const current = useSelector(selectCurent)
+  const current = useSelector(selectCurrent)
 
   if (!current) {
     return null

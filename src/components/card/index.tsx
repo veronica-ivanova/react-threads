@@ -11,11 +11,7 @@ import {
   useLikePostMutation,
   useUnlikePostMutation,
 } from "../../app/services/likesApi"
-import {
-  useDeletePostMutation,
-  useLazyGetAllPostsQuery,
-  useLazyGetPostByIdQuery,
-} from "../../app/services/postsApi"
+import { useDeletePostMutation} from "../../app/services/postsApi"
 import { useDeleteCommentMutation } from "../../app/services/commentsApi"
 import { Link, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
@@ -60,30 +56,11 @@ export const Card = ({
 }: Props) => {
   const [likePost] = useLikePostMutation()
   const [unlikePost] = useUnlikePostMutation()
-  const [triggerGetAllPosts] = useLazyGetAllPostsQuery()
-  const [triggerGetPostById] = useLazyGetPostByIdQuery()
   const [deletePost, deletePostStatus] = useDeletePostMutation()
   const [deleteComment, deleteCommentStatus] = useDeleteCommentMutation()
   const [error, setError] = useState("")
   const navigate = useNavigate()
   const currentUser = useSelector(selectCurrent)
-
-  const refetchPosts = async () => {
-    switch (cardFor) {
-      case "post":
-        await triggerGetAllPosts().unwrap()
-        break
-      case "current-post":
-        await triggerGetAllPosts().unwrap()
-        break
-      case "comment":
-        console.log("postId in comment card:", id)
-        await triggerGetPostById(id).unwrap()
-        break
-      default:
-        throw new Error("Неверный аргумент cardFor")
-    }
-  }
 
   const handleClick = async () => {
     try {
@@ -91,8 +68,6 @@ export const Card = ({
         ? await unlikePost(id).unwrap()
         : await likePost({ postId: id }).unwrap()
 
-      await refetchPosts()
-      await triggerGetPostById(id).unwrap()
     } catch (error) {
       if (hasErrorField(error)) {
         setError(error.data.error)
@@ -107,7 +82,6 @@ export const Card = ({
       switch (cardFor) {
         case "post":
           await deletePost(id).unwrap()
-          await refetchPosts()
           break
         case "current-post":
           await deletePost(id).unwrap()
@@ -115,7 +89,6 @@ export const Card = ({
           break
         case "comment":
           await deleteComment(commentId).unwrap()
-          await refetchPosts()
           break
         default:
           throw new Error("Неверный аргумент cardFor")

@@ -14,19 +14,25 @@ export const postApi = api.injectEndpoints({
             query: () => ({
                 url: '/posts',
                 method: 'GET'
-            })
+            }),
+            providesTags: ['Posts'],
         }),
         getPostById: builder.query<Post, string>({
             query: (id) => ({
                 url: `/posts/${id}`,
                 method: 'GET'
-            })
+            }),
+            providesTags: (_r, _e, id) => [{ type: 'Post', id}]
         }),
         deletePost: builder.mutation<void, string>({
             query: (id) => ({
                 url: `/posts/${id}`,
                 method: 'DELETE'
-            })
+            }),
+            invalidatesTags: (_r, _e, postId ) => [
+                "Posts",
+                { type: "Post", id: postId },
+            ],
         })
     })
 })

@@ -22,6 +22,7 @@ import { BASE_URL } from "../../constants"
 import { ProfileInfo } from "../../components/profile-info"
 import { formatToClientDate } from "../../utils/format-to-client-date"
 import { CountInfo } from "../../components/count-info"
+import { EditProfile } from "../../components/edit-profile"
 
 export const UserProfile = () => {
   const { id } = useParams<{ id: string }>()
@@ -58,6 +59,18 @@ export const UserProfile = () => {
       }
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const handleClose = async () => {
+    try {
+      if (id) {
+        await triggerGetUserByIdQuery(id)
+        await triggerCurrentQuery()
+        onClose()
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -113,6 +126,7 @@ export const UserProfile = () => {
           </div>
         </Card>
       </div>
+      <EditProfile isOpen={isOpen} onClose={handleClose} user={data}/>
     </>
   )
 }

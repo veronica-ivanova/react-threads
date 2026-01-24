@@ -1,27 +1,62 @@
-# vite-template-redux
+# Threads (Client)
 
-Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
+Клиентское приложение — мини социальная сеть.
 
-```sh
-npx tiged reduxjs/redux-templates/packages/vite-template-redux my-app
+## Реализованный функционал
+
+- регистрация и авторизация пользователей
+
+- редактирование профиля
+
+- создание постов и комментариев
+
+- лайки
+
+- подписки и подписчики
+
+- просмотр профилей пользователей
+
+- переключение темы (light / dark)
+
+## Стек технологий
+
+- TypeScript
+
+- React
+
+- React Router
+
+- Redux Toolkit
+
+- RTK Query
+
+- NextUI
+
+## Запуск проекта
+
+1. Запустить серверную часть
+
+Сначала необходимо запустить API (см. README сервера):
+https://github.com/veronica-ivanova/express-threads-api.git
+
+2. Клонировать клиентский репозиторий
+```
+git clone https://github.com/veronica-ivanova/react-threads.git
+```
+3. Установить зависимости
+```
+npm install
 ```
 
-## Goals
+4. Запустить клиент
+```
+npm run dev
+  ```
 
-- Easy migration from Create React App or Vite
-- As beginner friendly as Create React App
-- Optimized performance compared to Create React App
-- Customizable without ejecting
+5. Открыть приложение в браузере
+   http://localhost:5173
 
-## Scripts
+### Примечания
 
-- `dev`/`start` - start dev server and open browser
-- `build` - build for production
-- `preview` - locally preview production build
-- `test` - launch test runner
-
-## Inspiration
-
-- [Create React App](https://github.com/facebook/create-react-app/tree/main/packages/cra-template)
-- [Vite](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react)
-- [Vitest](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
+- Docker используется только для серверной части
+- Клиентское приложение использует Vite
